@@ -140,3 +140,31 @@ ALLOW_MISSING_DEPENDENCIES := true
 BOARD_AVB_RECOVERY_ADD_HASH_FOOTER_ARGS += \
     --prop com.android.build.boot.os_version:$(PLATFORM_VERSION) \
     --prop com.android.build.boot.security_patch:$(PLATFORM_SECURITY_PATCH)
+
+#SHRP_Variables
+SHRP_PATH := device/samsung/m51
+SHRP_MAINTAINER := Okada
+SHRP_DEVICE_CODE := m51
+SHRP_EDL_MODE := 1
+SHRP_EXTERNAL := /external_sd
+SHRP_INTERNAL := /sdcard
+SHRP_OTG := /usbotg
+SHRP_REC := /dev/block/bootdevice/by-name/recovery
+SHRP_REC_TYPE := Treble
+SHRP_DEVICE_TYPE := A-Only
+SHRP_FLASH := 1
+SHRP_EXPRESS := true
+SHRP_OFFICIAL := true
+SHRP_DARK := true
+SHRP_NOTCH := true
+
+# Including Magisk into recovery ramdisk
+INC_IN_REC_MAGISK := true
+
+# Including default addons into recovery ramdisk
+INC_IN_REC_ADDON_1 := true
+INC_IN_REC_ADDON_2 := true
+INC_IN_REC_ADDON_3 := true
+INC_IN_REC_ADDON_4 := true
+
+SHRP_NO_SAR_AUTOMOUNT := true
