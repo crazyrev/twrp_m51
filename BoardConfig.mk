@@ -2,7 +2,6 @@
 # Copyright (C) 2022 The Android Open Source Project
 # Copyright (C) 2022 The TWRP Open Source Project
 # Copyright (C) 2022 SebaUbuntu's TWRP device tree generator
-# Copyright (C) 2022 OrangeFox Recovery Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -86,16 +85,18 @@ PLATFORM_SECURITY_PATCH := 2099-12-31
 PLATFORM_VERSION := 16.1.0
 
 #Encryption 
-TW_INCLUDE_CRYPTO := true
-TW_INCLUDE_CRYPTO_FBE := true
-TW_INCLUDE_FBE_METADATA_DECRYPT := true
-BOARD_USES_METADATA_PARTITION := true
-BOARD_USES_QCOM_FBE_DECRYPTION := true
+TW_INCLUDE_CRYPTO := false
+TW_INCLUDE_CRYPTO_FBE := false
+BOARD_USES_METADATA_PARTITION := false
+TW_INCLUDE_FBE_METADATA_DECRYPT := false
 VENDOR_SECURITY_PATCH := 2099-12-31
 
 # Avb
-BOARD_AVB_ENABLE := true
-BOARD_AVB_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
+BOARD_AVB_SYSTEM_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
+BOARD_AVB_SYSTEM_ROLLBACK_INDEX_LOCATION := 1
+BOARD_AVB_SYSTEM_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
+BOARD_AVB_SYSTEM_ALGORITHM := SHA256_RSA2048
+BOARD_AVB_ENABLE := false
 
 # Dynamic Partition
 BOARD_SUPER_PARTITION_SIZE := 8053063680
@@ -104,7 +105,7 @@ BOARD_SAMSUNG_DYNAMIC_PARTITIONS_SIZE := 8048869376
 BOARD_SAMSUNG_DYNAMIC_PARTITIONS_PARTITION_LIST := product vendor system odm
 
 # System as root
-BOARD_ROOT_EXTRA_FOLDERS := prism product optics metadata misc
+BOARD_ROOT_EXTRA_FOLDERS := persist efs
 BOARD_SUPPRESS_SECURE_ERASE := true
 
 # Exclude twrpApex.cpp from recovery
@@ -123,6 +124,15 @@ TW_DEFAULT_BRIGHTNESS := 1000
 TARGET_USES_MKE2FS := true
 TW_EXCLUDE_TWRPAPP := true
 TW_NO_SCREEN_BLANK := true
+TARGET_USE_CUSTOM_LUN_FILE_PATH := "/config/usb_gadget/g1/functions/mass_storage.0/lun.%d/file"
+TW_NO_REBOOT_BOOTLOADER := true
+TW_HAS_DOWNLOAD_MODE := true
+TW_EXCLUDE_DEFAULT_USB_INIT := true
+TW_NO_EXFAT_FUSE := true
+TW_CUSTOM_CPU_TEMP_PATH := /sys/class/thermal/thermal_zone17/temp
+TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel0-backlight/brightness"
+TW_MAX_BRIGHTNESS := 365
+TW_DEFAULT_BRIGHTNESS := 219
 
 # TWRP_EVENT_LOGGING := true
 TWRP_INCLUDE_LOGCAT := true
@@ -135,36 +145,3 @@ TW_INCLUDE_NTFS_3G := true
 
 # For building with minimal manifest
 ALLOW_MISSING_DEPENDENCIES := true
-
-# Fix Android 11 Decryption
-BOARD_AVB_RECOVERY_ADD_HASH_FOOTER_ARGS += \
-    --prop com.android.build.boot.os_version:$(PLATFORM_VERSION) \
-    --prop com.android.build.boot.security_patch:$(PLATFORM_SECURITY_PATCH)
-
-#SHRP_Variables
-SHRP_PATH := device/samsung/m51
-SHRP_MAINTAINER := Okada
-SHRP_DEVICE_CODE := m51
-SHRP_EDL_MODE := 1
-SHRP_EXTERNAL := /external_sd
-SHRP_INTERNAL := /sdcard
-SHRP_OTG := /usbotg
-SHRP_REC := /dev/block/bootdevice/by-name/recovery
-SHRP_REC_TYPE := Treble
-SHRP_DEVICE_TYPE := A-Only
-SHRP_FLASH := 1
-SHRP_EXPRESS := true
-SHRP_OFFICIAL := true
-SHRP_DARK := true
-SHRP_NOTCH := true
-
-# Including Magisk into recovery ramdisk
-INC_IN_REC_MAGISK := true
-
-# Including default addons into recovery ramdisk
-INC_IN_REC_ADDON_1 := true
-INC_IN_REC_ADDON_2 := true
-INC_IN_REC_ADDON_3 := true
-INC_IN_REC_ADDON_4 := true
-
-SHRP_NO_SAR_AUTOMOUNT := true

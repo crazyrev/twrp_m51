@@ -21,14 +21,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
 
 LOCAL_PATH := device/samsung/m51
 
-# Qcom standerd Decryption
-PRODUCT_PACKAGES += \
-    qcom_decrypt \
-    qcom_decrypt_fbe
-
-# Dynamic partitions
-PRODUCT_USE_DYNAMIC_PARTITIONS := true
-
 # fastbootd
 PRODUCT_PACKAGES += \
     android.hardware.fastboot@1.0-impl-mock \
@@ -38,7 +30,3 @@ PRODUCT_PACKAGES += \
 # Apex libraries
 PRODUCT_HOST_PACKAGES += \
     libandroidicu
-
-# HACK: Set vendor patch level
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.build.security_patch=2099-12-31
