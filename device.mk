@@ -30,3 +30,5 @@ PRODUCT_PACKAGES += \
 # Apex libraries
 PRODUCT_HOST_PACKAGES += \
     libandroidicu
+
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
