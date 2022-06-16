@@ -20,11 +20,11 @@
 $(call inherit-product, device/samsung/m51/device.mk)
 
 # Inherit some common Omni stuff.
-$(call inherit-product, vendor/omni/config/common.mk)
+$(call inherit-product, vendor/twrp/config/common.mk)
 
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := m51
-PRODUCT_NAME := omni_m51
+PRODUCT_NAME := twrp_m51
 PRODUCT_BRAND := samsung
 PRODUCT_MODEL := SM-M515F
 PRODUCT_MANUFACTURER := samsung

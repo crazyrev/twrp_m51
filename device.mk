@@ -18,6 +18,7 @@
 
 # Inherit from the common Open Source product configuration
 $(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
 
 LOCAL_PATH := device/samsung/m51
 
@@ -26,6 +27,11 @@ PRODUCT_PACKAGES += \
     android.hardware.fastboot@1.0-impl-mock \
 	android.hardware.fastboot@1.0-impl-mock.recovery \
     fastbootd
+
+# Decrypt
+PRODUCT_PACKAGES_ENG += \
+     qcom_decrypt \
+     qcom_decrypt_fbe
 
 # Apex libraries
 PRODUCT_HOST_PACKAGES += \
